@@ -28,16 +28,16 @@ pipeline {
 
     stage('Test') {
             steps {
-
                        sh  'mvn test'
+                  }
+            }
 
 
-                        }}
-                        stage("Sonar Analysis") {
-                        def mvn = tool 'Default Maven';
+     stage("Sonar Analysis") {
+                        def mvn = tool 'maven';
                             withSonarQubeEnv() {
                               sh "${mvn}/bin/mvn clean verify sonar:sonar -Dsonar.projectKey=Devops"
-                        }
+                        }}
 
 
 
