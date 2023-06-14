@@ -55,7 +55,13 @@
 		</dependency>
 
 	</dependencies>
-
+	<distributionManagement>
+	<repository>
+		<id>nexus-site</id>
+		<name>Nexus Repository</name>
+		<url>http://192.168.1.16:8081/repository/maven-relases/</url>
+	</repository>
+</distributionManagement>
 	<build>
 		<plugins>
 			<plugin>
