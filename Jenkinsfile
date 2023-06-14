@@ -38,10 +38,14 @@ pipeline {
 
   stage('SonarQube analysis') {
             steps {
-                        sh 'mvn clean verify sonar:sonar -Dsonar.login=admin -Dsonar.password=Gad67689@v -Dsonar.projectKey=Devops'
+                        sh 'mvn  sonar:sonar -Dsonar.login=admin -Dsonar.password=Gad67689@v -Dsonar.projectKey=Devops'
                   }
             }
-
+stage('Build') {
+            steps {
+                        sh 'mvn package '
+                  }
+            }
 
 
 
