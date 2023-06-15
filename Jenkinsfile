@@ -46,7 +46,7 @@ stage('Build') {
                         sh 'mvn package '
                   }
             }
-    
+
 
 stage('Deploy') {
             steps {
