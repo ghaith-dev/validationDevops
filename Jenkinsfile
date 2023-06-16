@@ -55,7 +55,13 @@ stage('Deploy') {
             }
 
 
-
+ stage('build docker image') {
+                steps {
+                    script {
+                        docker.build("achat:latest")
+                    }
+                }
+            }
 
 
 
