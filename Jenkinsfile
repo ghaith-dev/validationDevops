@@ -1,5 +1,11 @@
 pipeline {
     agent any
+    environment {
+        registry = "ghaith19/devops"
+            registryCredential = 'DockerHubCreds'
+
+
+        }
      tools {
           maven 'maven'
 
@@ -58,12 +64,21 @@ stage('Deploy') {
  stage('build docker image') {
                 steps {
                     script {
-                        docker.build("achat:latest")
+                        dockerImage = docker.build registry + ":$BUILD_NUMBER"
                     }
                 }
             }
 
-
+stage('push docker image') {
+                            steps {
+                                script {
+                                    docker.withRegistry('https://registry.hub.docker.com/', 'DockerHubCreds') {
+                                    docker.registry = "ghaith19/devops"
+                                    dockerImage.push()
+                                    }
+                                }
+                            }
+                        }
 
 
 
