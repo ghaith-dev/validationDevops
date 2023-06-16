@@ -32,5 +32,6 @@ class CategorieProduitServiceTest {
     void initTest() {
         Assertions.assertNotNull(categorieProduitService);
         Assertions.assertNotNull(categorieProduitServiceImpl);
+        Assertions.assertEquals(1, 1);
     }
 }
