@@ -1,0 +1,22 @@
+version: '3.8'
+services:
+  BACKEND:
+    image: ghaith19/devops:latest
+    volumes:
+      - ./app:/app
+    ports:
+      - 8089:8089
+    working_dir: /app
+    command: mvn spring-boot:run
+    depends_on:
+      - MYSQL-DATABASE
+  MYSQL-DATABASE:
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_USER: myuser
+      MYSQL_PASSWORD: mypassword
+    ports:
+      - 3306:3306
+    volumes:
+      - ./data:/var/lib/mysql

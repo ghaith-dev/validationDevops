@@ -71,13 +71,25 @@ stage('Deploy') {
 
 stage('push docker image') {
                             steps {
-                                sh 'docker login -u ghaith19 -p Gad67689@v'
-                                sh 'docker push ghaith19/devops:$BUILD_NUMBER'
+                                script {
+                                    docker.withRegistry( '', 'DockerHubCreds' ) {
+                                        dockerImage.push('latest')
+                                    }
+                                }
                             }
                         }
 
+stage('Cleaning up') {
+            steps {
+                sh "docker rmi $registry:$BUILD_NUMBER"
+            }
+        }
 
-
+stage('start Application ') {
+                            steps {
+                               sh 'docker compose up'
+                            }
+                        }
 
         }
 
