@@ -1,13 +1,13 @@
 version: '3.8'
 services:
   BACKEND:
-    image: ghaith19/devops:latest
+    image: ghaith19/devops
     volumes:
       - ./app:/app
+      - .m2:/root/.m2
     ports:
       - 8089:8089
     working_dir: /app
-    command: mvn spring-boot:run
     depends_on:
       - MYSQL-DATABASE
   MYSQL-DATABASE:
