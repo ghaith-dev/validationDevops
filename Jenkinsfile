@@ -64,21 +64,15 @@ stage('Deploy') {
  stage('build docker image') {
                 steps {
                     script {
-                        dockerImage = docker.build("ghaith19/achat:latest")
+                        dockerImage = docker.build registry + ":$BUILD_NUMBER"
                     }
                 }
             }
 
 stage('push docker image') {
                             steps {
-                                script {
-
-                                 docker.withRegistry('https://registry.hub.docker.com', 'DockerHubCreds') {
-                                             dockerImage.push("${env.BUILD_NUMBER}")
-                                             dockerImage.push("latest")
-                                             }
-
-                                }
+                                sh 'docker login -u ghaith19 -p Gad67689@v'
+                                sh 'docker push ghaith19/devops:$BUILD_NUMBER'
                             }
                         }
 
