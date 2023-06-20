@@ -64,7 +64,7 @@ stage('Deploy') {
  stage('build docker image') {
                 steps {
                     script {
-                        dockerImage = docker.build registry + ":$BUILD_NUMBER"
+                        dockerImage = docker.build("ghaith19/achat:latest")
                     }
                 }
             }
@@ -72,10 +72,12 @@ stage('Deploy') {
 stage('push docker image') {
                             steps {
                                 script {
-                                    docker.withRegistry('', 'DockerHubCreds') {
-                                    docker.registry = "ghaith19/devops"
-                                    dockerImage.push()
-                                    }
+
+                                 docker.withRegistry('https://registry.hub.docker.com', 'DockerHubCreds') {
+                                             dockerImage.push("${env.BUILD_NUMBER}")
+                                             dockerImage.push("latest")
+                                             }
+
                                 }
                             }
                         }
