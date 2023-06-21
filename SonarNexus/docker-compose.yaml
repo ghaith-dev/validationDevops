@@ -1,0 +1,14 @@
+version: '3.8'
+services:
+  SonarQube:
+    image: sonarqube:latest
+    ports:
+      - "9000:9000"
+    volumes:
+      - ./sonarqube/conf:/opt/sonarqube/conf
+  Nexus:
+   image: sonatype/nexus3
+   ports:
+     - "8081:8081"
+   volumes:
+    - ./nexus/data:/nexus-data
