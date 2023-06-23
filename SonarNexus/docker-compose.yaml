@@ -4,8 +4,7 @@ services:
     image: sonarqube:latest
     ports:
       - "9000:9000"
-    volumes:
-      - ./sonarqube/conf:/opt/sonarqube/conf
+
   Nexus:
    image: sonatype/nexus3
    ports:
