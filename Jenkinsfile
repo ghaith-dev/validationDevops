@@ -13,14 +13,6 @@ pipeline {
         
     stages {
 
-/*        stage('launch nexus & sonar') {
-
-            steps {
-                       sh  'cd sonar/ && docker-compose up -d'
-            }
-
-            }*/
-
         stage('Compile') {
             steps
             {
