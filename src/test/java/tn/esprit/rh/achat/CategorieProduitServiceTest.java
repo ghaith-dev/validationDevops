@@ -78,7 +78,16 @@ public class CategorieProduitServiceTest {
        Assertions.assertEquals(deletdCategorieProduct,null);
 
     }
-
+    @Test
+  void testUpdateCategorieProduit(){
+        CategorieProduit cp = new CategorieProduit();
+        cp.setCodeCategorie("produitToBeUpdated");
+        cp.setLibelleCategorie("libelleToBeUpdated");
+        CategorieProduit addedCategorieProduit = produitService.addCategorieProduit(cp);
+        CategorieProduit updatedCategorieProduit = produitService.updateCategorieProduit(addedCategorieProduit);
+        Assertions.assertEquals(updatedCategorieProduit.getCodeCategorie(),"produitToBeUpdated");
+        Assertions.assertEquals(updatedCategorieProduit.getLibelleCategorie(),"libelleToBeUpdated");
+  }
 
 
 }
