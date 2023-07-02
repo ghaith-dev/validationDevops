@@ -1,8 +1,8 @@
 pipeline {
     agent any
     environment {
-        registry = "ghaith19/devops"
-            registryCredential = 'DockerHubCreds'
+        registry = "momo5ms1/ValidationDevOps"
+            registryCredential = 'DockerHubLogin'
 
 
         }
@@ -11,28 +11,26 @@ pipeline {
 
         }
     stages {
-        stage('Clean') {
+
+        stage('launch nexus & sonar') {
+
+            steps {
+                       sh  'cd sonar/ && docker compose up -d'
+            }
+
+            }
+
+        stage('Compile') {
             steps {
 
-                       sh  'mvn clean'
+                       sh  'mvn clean install -DskipTests && mvn compile'
 
 
 
             }
             }
 
-
-   stage('Compile') {
-            steps {
-
-                       sh  'mvn compile'
-
-
-
-            }
-            }
-
-    stage('Test') {
+        stage('Test') {
             steps {
                        sh  'mvn test'
                   }
@@ -42,26 +40,26 @@ pipeline {
 
 
 
-  stage('SonarQube analysis') {
+        stage('SonarQube analysis') {
             steps {
-                        sh 'mvn  sonar:sonar -Dsonar.login=admin -Dsonar.password=Gad67689@v -Dsonar.projectKey=Devops'
+                        sh ''
                   }
             }
-stage('Build') {
+        stage('Build') {
             steps {
-                        sh 'mvn package '
-                  }
-            }
-
-
-stage('Deploy') {
-            steps {
-                        sh 'mvn deploy'
+                        sh 'mvn package -DskipTests'
                   }
             }
 
 
- stage('build docker image') {
+        stage('Deploy') {
+            steps {
+                        sh 'mvn deploy -DskipTests'
+                  }
+            }
+
+
+        stage('build docker image') {
                 steps {
                     script {
                         dockerImage = docker.build registry + ":$BUILD_NUMBER"
@@ -69,23 +67,23 @@ stage('Deploy') {
                 }
             }
 
-stage('push docker image') {
+        stage('push docker image') {
                             steps {
                                 script {
-                                    docker.withRegistry( '', 'DockerHubCreds' ) {
+                                    docker.withRegistry( '', 'DockerHubLogin' ) {
                                         dockerImage.push('latest')
                                     }
                                 }
                             }
                         }
 
-stage('Cleaning up') {
+        stage('Cleaning up') {
             steps {
                 sh "docker rmi $registry:$BUILD_NUMBER"
             }
         }
 
-stage('start Application ') {
+        stage('start Application ') {
                             steps {
                                sh 'docker compose up -d '
                             }

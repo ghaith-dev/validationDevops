@@ -1,7 +1,7 @@
 version: '3.8'
 services:
   BACKEND:
-    image: ghaith19/devops:latest
+    image: momo5ms1/ValidationDevOps:latest
     volumes:
       - ./app:/app
     ports:
