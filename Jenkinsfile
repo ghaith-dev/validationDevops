@@ -11,6 +11,13 @@ pipeline {
 
         }
     stages {
+        stage('Start docker compose ') {
+            steps {
+
+                       sh  'cd SonarNexus/ && docker compose up -d'
+
+            }
+            }
 
         stage('Clean') {
             steps {
