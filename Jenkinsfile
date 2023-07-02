@@ -15,7 +15,7 @@ pipeline {
         stage('launch nexus & sonar') {
 
             steps {
-                       sh  'cd sonar/ && docker compose up -d'
+                       sh  'cd sonar/ && docker-compose up -d'
             }
 
             }
