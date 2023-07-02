@@ -15,7 +15,7 @@ pipeline {
         stage('Clean') {
             steps {
 
-                       sh  'mvn install -DskipTests'
+                       sh  'mvn clean install -DskipTests'
 
             }
             }
@@ -30,7 +30,7 @@ pipeline {
 
     stage('Test') {
             steps {
-                       sh  'mvn test'
+                         sh  'docker restart achat-MYSQL-DATABASE-1 && mvn test && docker stop achat-MYSQL-DATABASE-1'
                   }
             }
 
@@ -45,14 +45,14 @@ pipeline {
             }
 stage('Build') {
             steps {
-                        sh 'mvn package '
+                        sh 'mvn package -DskipTests'
                   }
             }
 
 
 stage('Deploy') {
             steps {
-                        sh 'mvn deploy'
+                        sh 'mvn deploy -DskipTests'
                   }
             }
 
