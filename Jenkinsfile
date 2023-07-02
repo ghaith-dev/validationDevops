@@ -12,13 +12,13 @@ pipeline {
         }
     stages {
 
-        stage('launch nexus & sonar') {
+/*        stage('launch nexus & sonar') {
 
             steps {
                        sh  'cd sonar/ && docker-compose up -d'
             }
 
-            }
+            }*/
 
         stage('Compile') {
             steps {
@@ -42,7 +42,7 @@ pipeline {
 
         stage('SonarQube analysis') {
             steps {
-                        sh ''
+                        sh 'mvn  sonar:sonar -Dsonar.login=admin -Dsonar.password=momo102030 -Dsonar.projectKey=MohamedDevOps'
                   }
             }
         stage('Build') {
