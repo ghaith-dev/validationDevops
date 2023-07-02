@@ -6,10 +6,11 @@ pipeline {
 
 
         }
-     tools {
+        tools {
           maven 'maven'
 
         }
+        
     stages {
 
 /*        stage('launch nexus & sonar') {
@@ -21,23 +22,18 @@ pipeline {
             }*/
 
         stage('Compile') {
-            steps {
-
-                       sh  'mvn clean install -DskipTests && mvn compile'
-
-
-
+            steps
+            {
+                sh  'mvn clean install -DskipTests && mvn compile'
             }
-            }
+        }
 
         stage('Test') {
-            steps {
-                       sh  'mvn test'
-                  }
+            steps 
+            {
+                sh  'mvn test'
             }
-
-
-
+        }
 
 
         stage('SonarQube analysis') {
@@ -68,14 +64,14 @@ pipeline {
             }
 
         stage('push docker image') {
-                            steps {
-                                script {
-                                    docker.withRegistry( '', 'DockerHubLogin' ) {
-                                        dockerImage.push('latest')
-                                    }
-                                }
-                            }
-                        }
+            steps {
+                script {
+                        docker.withRegistry( '', 'DockerHubLogin' ) {
+                        dockerImage.push('latest')
+                    }
+                }
+            }
+        }
 
         stage('Cleaning up') {
             steps {
@@ -84,11 +80,10 @@ pipeline {
         }
 
         stage('start Application ') {
-                            steps {
-                               sh 'docker compose up -d '
-                            }
-                        }
-
+            steps {
+                sh 'docker compose up -d '
+            }
         }
 
     }
+}
