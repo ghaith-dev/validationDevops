@@ -1,7 +1,7 @@
 pipeline {
     agent any
     environment {
-        registry = "momo5ms1/ValidationDevOps"
+        registry = "momo5ms1/validationdevops"
             registryCredential = 'DockerHubLogin'
 
 
