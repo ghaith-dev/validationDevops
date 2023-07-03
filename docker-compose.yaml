@@ -1,7 +1,7 @@
 version: '3.8'
 services:
   BACKEND:
-    image: momo5ms1/ValidationDevOps:latest
+    image: momo5ms1/validationdevops:latest
     volumes:
       - ./app:/app
     ports:
