@@ -31,7 +31,7 @@ pipeline {
 
     stage('Test') {
             steps {
-                         sh  'docker restart achat-MYSQL-DATABASE-1 && mvn test && docker stop achat-MYSQL-DATABASE-1'
+                         sh  'docker restart DB-TEST && mvn test && docker stop DB-TEST'
                   }
             }
 
