@@ -36,9 +36,6 @@ pipeline {
             }
 
 
-
-
-
   stage('SonarQube analysis') {
             steps {
                         sh 'mvn  sonar:sonar -Dsonar.login=admin -Dsonar.password=Gad67689@v -Dsonar.projectKey=Devops'
