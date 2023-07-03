@@ -24,6 +24,14 @@ services:
       - mysql_data:/var/lib/mysql
     networks:
       - mynetwork
+  FRONTEND:
+    image: ghaith19/frontendapp
+    volumes:
+      - ./app:/app
+    ports:
+      - 80:80
+    depends_on:
+      - BACKEND
 volumes:
   mysql_data:
     
