@@ -16,7 +16,7 @@ services:
 
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: test
-      MYSQL_USER: root
+      MYSQL_USER: vagrant
       MYSQL_PASSWORD: root
     ports:
       - 3306:3306
