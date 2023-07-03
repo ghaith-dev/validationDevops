@@ -31,7 +31,7 @@ pipeline {
 
     stage('Test') {
             steps {
-                         sh  'docker restart DB-TEST && mvn test && docker stop DB-TEST'
+                         sh  'mvn test'
                   }
             }
 
